@@ -47,9 +47,9 @@ local = ["transformers>=4.37.0", "torch>=2.0.0"]
 all = ["law-llm[dev,train,serve,local]"]
 
 [project.urls]
-"Homepage" = "https://github.com/alexa0030/GreenRAG"
-"Repository" = "https://github.com/alexa0030/GreenRAG"
-"Issues" = "https://github.com/alexa0030/GreenRAG/issues"
+"Homepage" = "https://github.com/alexa0030/law-llm"
+"Repository" = "https://github.com/alexa0030/law-llm"
+"Issues" = "https://github.com/alexa0030/law-llm/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

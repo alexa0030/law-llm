@@ -91,8 +91,8 @@ LoRA 微调 (LLaMA-Factory)    │
 ### 安装
 
 ```bash
-git clone https://github.com/alexa0030/GreenRAG.git
-cd GreenRAG
+git clone https://github.com/alexa0030/law-llm.git
+cd law-llm
 pip install -e ".[dev]"
 ```
 
