@@ -10,7 +10,7 @@ readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.9"
 authors = [
-    { name = "Your Name", email = "your.email@example.com" },
+    { name = "alexa0030" },
 ]
 keywords = ["legal", "llm", "rag", "sft", "lora", "law", "chinese"]
 classifiers = [
@@ -47,9 +47,9 @@ local = ["transformers>=4.37.0", "torch>=2.0.0"]
 all = ["law-llm[dev,train,serve,local]"]
 
 [project.urls]
-"Homepage" = "https://github.com/your-username/law-llm"
-"Repository" = "https://github.com/your-username/law-llm"
-"Issues" = "https://github.com/your-username/law-llm/issues"
+"Homepage" = "https://github.com/alexa0030/GreenRAG"
+"Repository" = "https://github.com/alexa0030/GreenRAG"
+"Issues" = "https://github.com/alexa0030/GreenRAG/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
