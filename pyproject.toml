@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "law-llm"
+version = "0.1.0"
+description = "面向法律咨询场景的大语言模型微调与 RAG 系统"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+authors = [
+    { name = "Your Name", email = "your.email@example.com" },
+]
+keywords = ["legal", "llm", "rag", "sft", "lora", "law", "chinese"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Legal Industry",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "flask>=3.0.0",
+    "gradio>=4.0.0",
+    "openai>=1.0.0",
+    "sentence-transformers>=2.2.0",
+    "faiss-cpu>=1.7.4",
+    "numpy>=1.24.0",
+    "tqdm>=4.65.0",
+    "langchain>=0.1.0",
+    "langchain-community>=0.0.10",
+    "langchain-core>=0.1.0",
+    "langchain-text-splitters>=0.0.1",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4.0", "pytest-cov>=4.1.0"]
+train = ["llamafactory>=0.6.0", "transformers>=4.37.0", "torch>=2.0.0"]
+serve = ["vllm>=0.4.0"]
+local = ["transformers>=4.37.0", "torch>=2.0.0"]
+all = ["law-llm[dev,train,serve,local]"]
+
+[project.urls]
+"Homepage" = "https://github.com/your-username/law-llm"
+"Repository" = "https://github.com/your-username/law-llm"
+"Issues" = "https://github.com/your-username/law-llm/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"

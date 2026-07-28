@@ -1,0 +1,80 @@
+# -*- coding: utf-8 -*-
+# Docker Compose for law-llm
+# 一键启动: docker-compose -f docker/docker-compose.yml up -d
+
+version: "3.8"
+
+services:
+  # vLLM 推理服务 (需要 GPU)
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: law-llm-vllm
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../outputs:/models
+    command: >
+      --model /models/sft_lora_merged
+      --port 8000
+      --gpu-memory-utilization 0.90
+      --max-model-len 8192
+      --dtype bfloat16
+      --trust-remote-code
+      --served-model-name law-llm
+      --api-key EMPTY
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+
+  # Flask API 服务
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: law-llm-api
+    ports:
+      - "5000:5000"
+    environment:
+      - LAW_LLM_INDEX_DIR=/app/data/faiss_index
+      - LAW_LLM_API_BASE=http://vllm:8000/v1
+    volumes:
+      - ../data/faiss_index:/app/data/faiss_index
+    command: >
+      python -c "
+      from law_llm.service.api import run_server;
+      run_server(
+          host='0.0.0.0', port=5000,
+          index_dir='/app/data/faiss_index',
+          api_base='http://vllm:8000/v1'
+      )
+      "
+    depends_on:
+      - vllm
+    restart: unless-stopped
+
+  # Gradio Demo
+  demo:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: law-llm-demo
+    ports:
+      - "7860:7860"
+    environment:
+      - LAW_LLM_INDEX_DIR=/app/data/faiss_index
+      - LAW_LLM_API_BASE=http://vllm:8000/v1
+    volumes:
+      - ../data/faiss_index:/app/data/faiss_index
+    command: >
+      python scripts/launch_demo.py
+      --index-dir /app/data/faiss_index
+      --api-base http://vllm:8000/v1
+      --host 0.0.0.0 --port 7860
+    depends_on:
+      - vllm
+    restart: unless-stopped

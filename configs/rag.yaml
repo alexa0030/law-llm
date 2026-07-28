@@ -1,0 +1,46 @@
+# RAG 系统配置
+
+# 法律文档配置
+law:
+  # 法律文档目录（Markdown 文件）
+  law_dir: data/laws
+  # 支持的文件格式
+  glob_pattern: "**/*.md"
+
+# 切分配置
+splitter:
+  chunk_size: 512
+  chunk_overlap: 50
+
+# Embedding 配置
+embedding:
+  model_name: BAAI/bge-small-zh-v1.5
+  device: cpu
+  batch_size: 64
+
+# FAISS 索引配置
+index:
+  output_dir: data/faiss_index
+  # 索引类型: flat (精确) / ivf (近似)
+  index_type: flat
+
+# 检索配置
+retrieval:
+  top_k: 5
+  # 最低相似度阈值，低于此值视为无证据
+  min_score: 0.3
+  # 元数据过滤（可选）
+  filter_law_name: null
+
+# 重排序配置（可选）
+reranker:
+  enabled: false
+  model_name: BAAI/bge-reranker-base
+  device: cpu
+
+# 生成配置
+generation:
+  temperature: 0.3
+  max_tokens: 2048
+  # 拒答阈值：检索最高分低于此值时拒答
+  refuse_threshold: 0.3

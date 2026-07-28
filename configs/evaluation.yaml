@@ -1,0 +1,54 @@
+# 评测配置
+
+# 评测数据集
+eval_dataset:
+  path: data/eval/eval_dataset.json
+  # 为空时使用内置 10 条示例集
+  fallback_to_sample: true
+
+# 检索评测
+retrieval:
+  top_k_values: [1, 3, 5]
+
+# 法条引用评测
+citation:
+  # 引用提取正则
+  pattern: "《([^》]+)》第([一二三四五六七八九十百千万零\\d]+[条章节])"
+
+# 答案正确性评测
+answer:
+  # 关键词匹配阈值
+  keyword_match_threshold: 0.5
+  # 是否使用 LLM Judge
+  use_llm_judge: false
+
+# 拒答能力评测
+refusal:
+  keywords:
+    - "无法"
+    - "不清楚"
+    - "不在"
+    - "未检索到"
+    - "不构成法律意见"
+    - "建议咨询"
+
+# 对比实验
+experiments:
+  - name: "base"
+    use_rag: false
+    is_sft: false
+  - name: "sft"
+    use_rag: false
+    is_sft: true
+  - name: "base+rag"
+    use_rag: true
+    is_sft: false
+  - name: "sft+rag"
+    use_rag: true
+    is_sft: true
+
+# 输出
+output:
+  dir: outputs/eval_results
+  save_predictions: true
+  save_errors: true

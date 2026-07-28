@@ -1,0 +1,76 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.idea/
+
+# Data (大文件不入库)
+data/raw/
+data/processed/
+data/faiss_index/
+data/DISC-Law-SFT/
+data/JEC-QA/
+data/JuDGE/
+*.zip
+*.torrent
+
+# 模型权重
+outputs/
+checkpoints/
+*.bin
+*.safetensors
+*.pt
+*.pth
+
+# 日志
+logs/
+*.log
+wandb/
+runs/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 环境变量
+.env
+.env.local
+
+# Docker
+docker/data/

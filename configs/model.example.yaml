@@ -1,0 +1,27 @@
+# 模型配置示例
+# 复制此文件为 model.yaml 并修改为你的实际配置
+
+# 推理模式: api (vLLM OpenAI 兼容) / local (HuggingFace 本地)
+mode: api
+
+# vLLM API 配置 (mode=api 时使用)
+api:
+  base_url: http://localhost:8000/v1
+  api_key: EMPTY
+  model_name: law-llm
+
+# 本地模型配置 (mode=local 时使用)
+local:
+  model_path: outputs/sft_lora_merged
+  device: auto  # auto / cpu / cuda / cuda:0
+
+# 生成参数
+generation:
+  temperature: 0.3
+  max_tokens: 2048
+  top_p: 0.9
+  repetition_penalty: 1.1
+
+# SFT 微调模型路径 (用于消融实验对比)
+sft_model_path: outputs/sft_lora_merged
+base_model_path: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
